@@ -1,0 +1,69 @@
+# REVIEW COSTS BEFORE APPLYING: two paid Starter services and two persistent disks.
+# No services are created by committing this file. Auto-deploy is disabled.
+services:
+  - type: pserv
+    name: agil-validation
+    runtime: python
+    region: singapore
+    plan: starter
+    numInstances: 1
+    autoDeploy: false
+    rootDir: validation-service
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn --bind 0.0.0.0:$PORT --workers 1 --threads 4 --timeout 30 app:app
+    disk:
+      name: agil-validation-audit
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - fromGroup: agil-internal-secrets
+      - key: PYTHON_VERSION
+        value: 3.12.14
+      - key: PORT
+        value: "10000"
+      - key: VALIDATION_DB
+        value: /var/data/validation.sqlite
+  - type: web
+    name: agil-api
+    runtime: node
+    region: singapore
+    plan: starter
+    numInstances: 1
+    autoDeploy: false
+    buildCommand: npm ci
+    startCommand: node backend/src/server.js
+    healthCheckPath: /api/health
+    disk:
+      name: agil-uploads
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - fromGroup: agil-internal-secrets
+      - key: NODE_VERSION
+        value: 24.22.1
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "10000"
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: VALIDATION_HOST
+        fromService:
+          type: pserv
+          name: agil-validation
+          property: host
+      - key: VALIDATION_PORT
+        value: "10000"
+      - key: UPLOAD_DIR
+        value: /var/data/uploads
+      - key: TRUST_PROXY_HOPS
+        value: "1"
+      - key: ALLOW_SYNTHETIC_DEMO
+        value: "false"
+envVarGroups:
+  - name: agil-internal-secrets
+    envVars:
+      - key: SERVICE_TOKEN
+        generateValue: true

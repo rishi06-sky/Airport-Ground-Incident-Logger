@@ -1,0 +1,87 @@
+
+> test
+> npm test -w backend && npm test -w frontend
+
+
+> agil-api@1.0.0 test
+> node --test --test-concurrency=1 src/*.test.js
+
+✔ CORS permits an exact configured Vercel origin and JWT preflight headers (29.359126ms)
+✔ CORS rejects unlisted origins including hostname suffix attacks (8.822301ms)
+✔ CORS defaults to same-origin proxy without a wildcard and permits internal health requests (6.981241ms)
+✔ CORS fails startup for wildcard, path, userinfo and malformed allowlist entries (0.5427ms)
+✔ Vercel configuration retains API-first and SPA fallback ordering with a supplied public HTTPS API (1.151469ms)
+✔ Vercel configuration rejects secret-bearing, non-HTTPS and ambiguous destinations (3.898486ms)
+✔ Render service discovery resolves an internal host/port without leaking secrets into the URL (0.241665ms)
+✔ Production fails closed for missing validation destination and malformed origins (0.312612ms)
+✔ TC01/03/06: complete valid FOD workflow uses authoritative service and primary route (3001.085849ms)
+✔ TC02/04: malformed identifiers rejected and audited without dispatch (63.617457ms)
+✔ TC07: damage classification (51.173175ms)
+✔ TC08: delay classification (43.093479ms)
+✔ TC09/21: safety notification persists and is scoped to officer (63.657292ms)
+✔ TC10: equipment classification (52.575615ms)
+✔ TC11: category priority wins multiple matches (45.913749ms)
+✔ TC12: unknown description rejected; unknown carrier safely enters correction queue (48.677179ms)
+✔ TC13: unknown zone enters correction queue (37.14868ms)
+✔ TC14: unavailable primary selects eligible backup (56.955682ms)
+✔ TC15/17: simultaneous submissions never overbook and excess reports queue (659.232174ms)
+✔ TC16: critical override never bypasses identifier validation (60.292648ms)
+✔ TC17: queue dispatch sorts priority then timestamp then report ID (144.200385ms)
+✔ TC18: concurrent repeated submissions and dispatch cannot duplicate assignments (138.204467ms)
+✔ TC19/24: transition enforcement and resolution releases capacity (65.862559ms)
+✔ TC20: data persists across database client reconnect (65.168194ms)
+✔ TC22: authorization denies unauthenticated access and staff admin actions (50.277673ms)
+✔ TC23: report ID and aircraft search plus date/status filters (51.095883ms)
+✔ Incomplete reports audited, not dispatched (25.142527ms)
+✔ Supervisor cannot see another team or change capacity (58.541062ms)
+✔ Admin route changes audited and retry correction queue (62.568693ms)
+✔ Classification settings validate exactly five categories (65.468528ms)
+✔ Controlled provisioning and login (669.851973ms)
+✔ Health checks both dependencies (21.110675ms)
+✔ Unsupported business identifiers and aircraft-carrier mapping are distinct from syntax errors (52.909579ms)
+✔ Durable recovery links SQLite validation ID to committed MongoDB report ID (105.256847ms)
+✔ Attachments require authorization and survive upload/download (53.811271ms)
+✔ Queue ties use timestamp then stable report ID (124.884066ms)
+✔ Concurrent resolution releases capacity once (91.228583ms)
+✔ Unavailable validation service fails closed without dispatch (25.352715ms)
+✔ Synthetic dataset: 100 real workflows, balanced categories, preserved records, capacity and rerun invariants (7387.602416ms)
+✔ Synthetic reset removes only its dataset, releases live capacity once, and normal submissions still resolve (6486.794496ms)
+✔ Synthetic seeding/reset are disabled by default and always refused in production (12.072846ms)
+✔ Normal API clients cannot forge trusted demo markers for selective reset (33.155373ms)
+ℹ tests 42
+ℹ suites 0
+ℹ pass 42
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 20864.659106
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+
+> agil-web@1.0.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /workspace/Airport-Ground-Incident-Logger/frontend
+
+ ✓ src/ui.test.jsx (2 tests) 21ms
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  10:42:07
+   Duration  617ms (transform 42ms, setup 0ms, collect 104ms, tests 21ms, environment 276ms, prepare 61ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

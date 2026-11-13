@@ -2,7 +2,7 @@
 
 Executed in this workspace on **13 November 2026** using real Flask/SQLite and a real MongoDB 7 replica set. Operational API tests use Supertest; there is no mocked validator, mocked database, or fabricated dispatch response. The browser tests use Chromium against Vite, Express, Flask, and MongoDB. They also passed against the compiled production bundle served with Vite preview.
 
-Final results: **34 backend/integration tests + 27 Python tests + 2 frontend tests + 2 browser tests = 65 passed, 0 failed, 0 skipped**. The restart persistence check and dependency checks are additional operational checks, not included in this test count.
+Final results: **42 backend/integration/deployment tests + 30 Python tests + 2 frontend tests + 2 browser tests = 76 passed, 0 failed, 0 skipped**. The restart persistence check and dependency checks are additional operational checks, not included in this test count.
 
 | ID | Objective and input | Expected output | Actual output | Result |
 |---|---|---|---|---|
@@ -74,3 +74,9 @@ The full existing browser suite was rerun through `node scripts/test-browser.mjs
 Actual application database: 100 new synthetic incidents, 20 per category/zone, plus five preserved originals (105 total). Priority distribution is 42 Normal / 30 High / 28 Emergency (existing Critical value). Synthetic statuses: 80 Resolved / 5 Assigned / 4 In Progress / 11 Pending. Twenty synthetic safety notifications are persisted. A second seed generated zero records. Fingerprint checks verified 42 pre-existing records/configuration documents remained unchanged (handler workload/timestamps excluded because real reservations legitimately changed them).
 
 Evidence: [seed output](synthetic-seed-results.json), [rerun output](synthetic-rerun-results.json), [preservation and dashboard verification](synthetic-verification-results.json), [isolated browser runner output](synthetic-browser-results.txt), [dashboard](synthetic-dashboard.png), [analytics](synthetic-analytics.png), [safety inbox](synthetic-safety.png). See [seed/reset instructions](synthetic-demonstration-data.md).
+
+## Deployment preparation verification
+
+Eight additional Node tests cover exact-origin CORS, authorization/idempotency preflight headers, rejected origins, invalid allowlists, API-first Vercel rewrites, safe HTTPS targets, Render private-service discovery, and missing/invalid production validation destinations. Three additional Python tests verify audit write failure returns 503, committed audit records survive service recreation, and SQLite's online backup captures WAL records without overwriting the live database or an existing snapshot.
+
+The full suite passed: 42 Node, 30 Python, two frontend and two isolated browser tests (76 total), plus the production build. The Render YAML was syntax-parsed with two service, persistent-disk and manual-deploy invariants checked. Platform acceptance, paid-resource provisioning and actual public URLs have not been tested or approved by these local checks. New runner evidence: [Node](deployment-verification/node.txt), [Python](deployment-verification/python.txt), [browser](deployment-verification/browser.txt), [build](deployment-verification/build.txt).

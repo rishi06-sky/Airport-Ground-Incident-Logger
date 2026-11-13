@@ -80,3 +80,5 @@ See [executed test cases](docs/test-cases.md) and [demo/viva guide](docs/present
 Production build and local integration are verified. **No public deployment has been performed.** Deployment needs a hosting account, MongoDB Atlas replica set access, secure service credentials, durable validator/upload disks, and production staff provisioning. See [exact deployment steps](docs/deployment.md).
 
 This is an engineering demonstration; real airport operation requires operational review, monitored backups, retention policies, abuse protection, attachment scanning, and organizational approval.
+
+Public hosting preparation: see [deployment configuration and approval checklist](deployment/README.md). Render storage is a paid-plan proposal; no hosting resources are created by the source files.
