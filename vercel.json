@@ -6,6 +6,11 @@
       "source": "/api/:path*",
       "destination": "https://REPLACE-WITH-YOUR-API.onrender.com/api/:path*"
     },
-    { "source": "/:path*", "destination": "/index.html" }
-  ]
+    {
+      "source": "/:path*",
+      "destination": "/index.html"
+    }
+  ],
+  "installCommand": "npm ci",
+  "framework": "vite"
 }

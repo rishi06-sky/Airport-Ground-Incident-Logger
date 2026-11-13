@@ -1,8 +1,10 @@
 import "dotenv/config";
 import mongoose from "mongoose";
+import { validationUrl } from "./runtime-config.js";
 import { recover } from "./recovery.js";
 import { app } from "./app.js";
 import { models, Setting } from "./models.js";
+process.env.VALIDATION_URL = validationUrl(process.env);
 if (
   !process.env.JWT_SECRET ||
   process.env.JWT_SECRET.length < 32 ||

@@ -18,6 +18,7 @@ import {
   Setting,
   Counter,
 } from "./models.js";
+import { cors } from "./cors.js";
 import { locked, drain, dispatch } from "./dispatch.js";
 export const app = express();
 app.set("trust proxy", Number(process.env.TRUST_PROXY_HOPS || 0));
@@ -28,6 +29,7 @@ app.use((req, res, next) => {
   res.set("X-Request-ID", req.requestId);
   next();
 });
+app.use("/api", cors(process.env.CORS_ORIGINS));
 const fail = (status, message) => Object.assign(new Error(message), { status });
 const guard = (roles) => (req, res, next) =>
   roles.includes(req.user.role) ? next() : next(fail(403, "Permission denied"));
@@ -80,10 +82,17 @@ app.get("/api/health", async (req, res) => {
     `${process.env.VALIDATION_URL || "http://127.0.0.1:5001"}/health`,
     { signal: AbortSignal.timeout(2000) },
   ).catch(() => null);
-  const ready = mongoose.connection.readyState === 1 && python?.ok;
+  const mongo =
+    mongoose.connection.readyState === 1 &&
+    (await mongoose.connection.db
+      .admin()
+      .ping({ timeoutMS: 2000 })
+      .then(() => true)
+      .catch(() => false));
+  const ready = mongo && python?.ok;
   res.status(ready ? 200 : 503).json({
     status: ready ? "ok" : "degraded",
-    mongo: mongoose.connection.readyState === 1,
+    mongo: !!mongo,
     validation: !!python?.ok,
   });
 });

@@ -1,0 +1,14 @@
+
+Running 2 tests using 1 worker
+
+(node:4335) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 e2e/workflow.spec.js:15:1 › staff submits real report, sees details, uses simulator; supervisor resolves it (4.0s)
+  ✓  2 e2e/workflow.spec.js:72:1 › admin dashboards and mobile navigation render without browser errors (2.4s)
+
+  2 passed (7.2s)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

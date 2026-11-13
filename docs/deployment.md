@@ -157,3 +157,7 @@ Before deployment, replace only the placeholder backend hostname in the root `ve
 ```
 
 Keep the API rewrite before the SPA fallback. The same-origin proxy avoids changing the existing API's CORS contract. Do not add JWT_SECRET, SERVICE_TOKEN, Atlas credentials, DEMO_PASSWORD, or SMTP credentials to Vercel/browser build variables. Actual service addresses and secret values become available only when those services are provisioned; no address in angle brackets is a claimed deployment URL.
+
+## Prepared deployment files
+
+The executable [Render blueprint](../render.yaml), [per-service environment templates and account checklist](../deployment/README.md), Vercel rewrite configuration helper, and public URL verification script now accompany this runbook. The blueprint is a paid-disk proposal with automatic redeployment disabled; it is not evidence of purchased resources or a public deployment. It uses VALIDATION_HOST/VALIDATION_PORT service discovery instead of requiring a guessed hostname.

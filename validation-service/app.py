@@ -26,7 +26,12 @@ def create_app():
         return response
     @app.get('/health')
     def health():
-        with connection() as con: con.execute('SELECT 1')
+        try:
+            with connection() as con:
+                con.execute('CREATE TABLE IF NOT EXISTS HealthProbe (id INTEGER PRIMARY KEY, checkedAt TEXT)')
+                con.execute('INSERT OR REPLACE INTO HealthProbe VALUES (1, ?)', (datetime.now(timezone.utc).isoformat(),))
+        except sqlite3.Error:
+            return jsonify(status='degraded', auditWritable=False), 503
         return jsonify(status='ok')
     @app.post('/validate')
     def validate():

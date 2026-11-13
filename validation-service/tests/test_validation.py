@@ -41,3 +41,47 @@ def test_service_auth_and_audit(tmp_path,monkeypatch):
     preview=client.post('/validate',json={'aircraftRegistration':'VT-ABC','incidentCode':'GND123','description':'debris','audit':False},headers={'X-Service-Token':'test-internal-key'})
     assert preview.json['valid']
     assert con.execute('select count(*) from ValidationAudit').fetchone()[0]==1
+
+def test_health_detects_unwritable_audit_storage(tmp_path,monkeypatch):
+    monkeypatch.setenv('VALIDATION_DB',str(tmp_path/'health.sqlite'))
+    from app import create_app
+    client=create_app().test_client()
+    def fail_connect(*args,**kwargs):
+        raise sqlite3.OperationalError('database is read-only')
+    monkeypatch.setattr(sqlite3,'connect',fail_connect)
+    response=client.get('/health')
+    assert response.status_code==503
+    assert response.json=={'status':'degraded','auditWritable':False}
+
+def test_health_probe_does_not_create_validation_reports_and_audits_survive_service_restart(tmp_path,monkeypatch):
+    path=tmp_path/'durable.sqlite'
+    monkeypatch.setenv('VALIDATION_DB',str(path))
+    monkeypatch.setenv('SERVICE_TOKEN','test-internal-key')
+    from app import create_app
+    client=create_app().test_client()
+    assert client.post('/validate',json={'aircraftRegistration':'VT-ABC','incidentCode':'GND123','description':'debris'},headers={'X-Service-Token':'test-internal-key'}).json['valid']
+    restored=create_app().test_client()
+    assert restored.get('/health').status_code==200
+    assert restored.get('/health').status_code==200
+    with sqlite3.connect(path) as con:
+        assert con.execute('select count(*) from ValidationAudit').fetchone()[0]==1
+        assert con.execute('select count(*) from HealthProbe').fetchone()[0]==1
+
+def test_online_backup_includes_committed_wal_records_and_preserves_original(tmp_path):
+    import importlib.util
+    from pathlib import Path
+    spec=importlib.util.spec_from_file_location('backup_audit',Path(__file__).resolve().parents[1]/'backup_audit.py')
+    module=importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    source=tmp_path/'source.sqlite'
+    target=tmp_path/'snapshot.sqlite'
+    with sqlite3.connect(source) as live:
+        live.execute('PRAGMA journal_mode=WAL')
+        live.execute('CREATE TABLE ValidationAudit (reportId TEXT)')
+        live.execute("INSERT INTO ValidationAudit VALUES ('synthetic-audit-backup-test')")
+        live.commit()
+        module.backup(source,target)
+        with sqlite3.connect(target) as restored:
+            assert restored.execute('SELECT reportId FROM ValidationAudit').fetchone()[0]=='synthetic-audit-backup-test'
+        with pytest.raises(ValueError):module.backup(source,target)
+        with pytest.raises(ValueError):module.backup(source,source)
