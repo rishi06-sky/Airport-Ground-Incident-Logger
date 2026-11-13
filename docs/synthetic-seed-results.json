@@ -1,0 +1,31 @@
+{
+  "dataset": "agil-synthetic-v1",
+  "total": 100,
+  "categories": {
+    "FOD": 20,
+    "Damage": 20,
+    "Delay": 20,
+    "Safety-Breach": 20,
+    "Equipment-Failure": 20
+  },
+  "priorities": {
+    "Normal": 42,
+    "High": 30,
+    "Emergency (Critical)": 28
+  },
+  "statuses": {
+    "Resolved": 80,
+    "Assigned": 5,
+    "In Progress": 4,
+    "Pending": 11
+  },
+  "zones": {
+    "A": 20,
+    "B": 20,
+    "C": 20,
+    "D": 20,
+    "E": 20
+  },
+  "notifications": 20,
+  "generated": 100
+}

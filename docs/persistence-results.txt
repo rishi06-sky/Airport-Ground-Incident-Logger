@@ -1,0 +1,1 @@
+PASS: incident, assignment, handler load and SQLite audit counts survived restart.

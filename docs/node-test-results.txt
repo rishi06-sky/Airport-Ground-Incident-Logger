@@ -1,0 +1,79 @@
+
+> test
+> npm test -w backend && npm test -w frontend
+
+
+> agil-api@1.0.0 test
+> node --test --test-concurrency=1 src/*.test.js
+
+✔ TC01/03/06: complete valid FOD workflow uses authoritative service and primary route (3507.196868ms)
+✔ TC02/04: malformed identifiers rejected and audited without dispatch (65.943645ms)
+✔ TC07: damage classification (59.524603ms)
+✔ TC08: delay classification (49.612977ms)
+✔ TC09/21: safety notification persists and is scoped to officer (71.034805ms)
+✔ TC10: equipment classification (56.838001ms)
+✔ TC11: category priority wins multiple matches (55.271901ms)
+✔ TC12: unknown description rejected; unknown carrier safely enters correction queue (57.64285ms)
+✔ TC13: unknown zone enters correction queue (45.173817ms)
+✔ TC14: unavailable primary selects eligible backup (56.843265ms)
+✔ TC15/17: simultaneous submissions never overbook and excess reports queue (861.747606ms)
+✔ TC16: critical override never bypasses identifier validation (68.223023ms)
+✔ TC17: queue dispatch sorts priority then timestamp then report ID (182.018621ms)
+✔ TC18: concurrent repeated submissions and dispatch cannot duplicate assignments (157.478512ms)
+✔ TC19/24: transition enforcement and resolution releases capacity (95.812034ms)
+✔ TC20: data persists across database client reconnect (76.816337ms)
+✔ TC22: authorization denies unauthenticated access and staff admin actions (71.798247ms)
+✔ TC23: report ID and aircraft search plus date/status filters (57.927508ms)
+✔ Incomplete reports audited, not dispatched (30.993897ms)
+✔ Supervisor cannot see another team or change capacity (68.583401ms)
+✔ Admin route changes audited and retry correction queue (71.779185ms)
+✔ Classification settings validate exactly five categories (89.76278ms)
+✔ Controlled provisioning and login (766.625392ms)
+✔ Health checks both dependencies (24.096696ms)
+✔ Unsupported business identifiers and aircraft-carrier mapping are distinct from syntax errors (73.502625ms)
+✔ Durable recovery links SQLite validation ID to committed MongoDB report ID (87.925785ms)
+✔ Attachments require authorization and survive upload/download (68.362711ms)
+✔ Queue ties use timestamp then stable report ID (221.068552ms)
+✔ Concurrent resolution releases capacity once (116.900904ms)
+✔ Unavailable validation service fails closed without dispatch (44.543451ms)
+✔ Synthetic dataset: 100 real workflows, balanced categories, preserved records, capacity and rerun invariants (9266.340655ms)
+✔ Synthetic reset removes only its dataset, releases live capacity once, and normal submissions still resolve (7629.06113ms)
+✔ Synthetic seeding/reset are disabled by default and always refused in production (14.767963ms)
+✔ Normal API clients cannot forge trusted demo markers for selective reset (35.773255ms)
+ℹ tests 34
+ℹ suites 0
+ℹ pass 34
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 24865.896779
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+
+> agil-web@1.0.0 test
+> vitest run
+
+
+ RUN  v3.2.7 /workspace/Airport-Ground-Incident-Logger/frontend
+
+ ✓ src/ui.test.jsx (2 tests) 27ms
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  10:22:51
+   Duration  810ms (transform 60ms, setup 0ms, collect 168ms, tests 27ms, environment 305ms, prepare 68ms)
+
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.2
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.2
+npm notice To update run: npm install -g npm@12.2.2
+npm notice

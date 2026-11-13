@@ -1,0 +1,99 @@
+{
+  "preservedOriginalIncidents": 5,
+  "preservedRecordFingerprints": 42,
+  "configurationPreserved": true,
+  "capacityConsistency": true,
+  "totalIncidents": 105,
+  "resolved": 84,
+  "unresolved": 21,
+  "critical": 28,
+  "statuses": [
+    {
+      "name": "Assigned",
+      "value": 6
+    },
+    {
+      "name": "Resolved",
+      "value": 84
+    },
+    {
+      "name": "In Progress",
+      "value": 4
+    },
+    {
+      "name": "Pending",
+      "value": 11
+    }
+  ],
+  "categories": [
+    {
+      "name": "FOD",
+      "value": 25
+    },
+    {
+      "name": "Damage",
+      "value": 20
+    },
+    {
+      "name": "Delay",
+      "value": 20
+    },
+    {
+      "name": "Safety-Breach",
+      "value": 20
+    },
+    {
+      "name": "Equipment-Failure",
+      "value": 20
+    }
+  ],
+  "zones": [
+    {
+      "name": "A",
+      "value": 25
+    },
+    {
+      "name": "B",
+      "value": 20
+    },
+    {
+      "name": "C",
+      "value": 20
+    },
+    {
+      "name": "D",
+      "value": 20
+    },
+    {
+      "name": "E",
+      "value": 20
+    }
+  ],
+  "handlerLoads": [
+    {
+      "handler": "H-AI",
+      "load": 2,
+      "capacity": 2
+    },
+    {
+      "handler": "H-6E",
+      "load": 2,
+      "capacity": 2
+    },
+    {
+      "handler": "H-SG",
+      "load": 2,
+      "capacity": 2
+    },
+    {
+      "handler": "H-UK",
+      "load": 2,
+      "capacity": 2
+    },
+    {
+      "handler": "H-OTHER",
+      "load": 2,
+      "capacity": 2
+    }
+  ]
+}

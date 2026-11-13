@@ -1,0 +1,26 @@
+node_modules/
+.env
+.venv/
+__pycache__/
+.pytest_cache/
+*.sqlite*
+.data/
+dist/
+*.log
+coverage/
+test-results/
+playwright-report/
+# Local environment variants and credential/database exports
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.sqlite*
+*.db
+*.db-wal
+*.db-shm
+*.dump
+*.bson
+.DS_Store
